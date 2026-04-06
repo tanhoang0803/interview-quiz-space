@@ -1,5 +1,11 @@
 # Interview Quiz Learning Space
 
+[![CI](https://github.com/tanhoang0803/interview-quiz-space/actions/workflows/ci.yml/badge.svg)](https://github.com/tanhoang0803/interview-quiz-space/actions/workflows/ci.yml)
+[![Deploy](https://github.com/tanhoang0803/interview-quiz-space/actions/workflows/deploy.yml/badge.svg)](https://github.com/tanhoang0803/interview-quiz-space/actions/workflows/deploy.yml)
+
+## Live Demo
+**[https://interview-quiz-space.vercel.app](https://interview-quiz-space.vercel.app)**
+
 ## Overview
 A free learning platform for practicing interview questions in:
 - JavaScript fundamentals
@@ -22,7 +28,7 @@ This project helps learners prepare for technical interviews by combining **quiz
 | Frontend | React 18, Redux Toolkit |
 | Auth & Storage | Firebase (Auth + Firestore) |
 | AI Assist | Groq API — llama-3.1-8b-instant (free tier) |
-| Hosting | Vercel / Netlify (free tier) |
+| Hosting | Vercel (free tier) |
 | CI/CD | GitHub Actions |
 
 ## Project Structure
@@ -43,7 +49,7 @@ src/
 ├── services/
 │   ├── quizService.js    # CRUD with Firestore
 │   ├── authService.js    # Firebase login
-│   └── aiService.js      # OpenAI question generation
+│   └── aiService.js      # Groq AI question generation
 ├── firebase/
 │   └── config.js
 ├── data/
@@ -68,7 +74,7 @@ npm install
 3. Create `.env` from the template:
 ```bash
 cp .env.example .env
-# Fill in your Firebase and OpenAI keys
+# Fill in your Firebase and Groq keys
 ```
 
 4. Run the app:
