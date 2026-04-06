@@ -38,6 +38,7 @@ const NavbarWrapper = () => {
 
 const App = () => {
   const dispatch = useDispatch();
+  const { authReady } = useSelector((state) => state.user);
 
   useEffect(() => {
     const unsubscribe = authService.onAuthStateChanged((user) => {
@@ -45,13 +46,15 @@ const App = () => {
         const { uid, email, displayName, photoURL } = user;
         dispatch(setUser({ uid, email, displayName, photoURL }));
       } else {
-        dispatch(setUser(null));
         dispatch(resetQuiz());
         dispatch(clearHistory());
+        dispatch(setUser(null));
       }
     });
     return unsubscribe;
   }, [dispatch]);
+
+  if (!authReady) return null;
 
   return (
     <BrowserRouter>

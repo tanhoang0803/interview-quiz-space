@@ -48,12 +48,14 @@ const userSlice = createSlice({
   name: 'user',
   initialState: {
     currentUser: null,
+    authReady: false,
     loading: false,
     error: null,
   },
   reducers: {
     setUser: (state, action) => {
       state.currentUser = action.payload;
+      state.authReady = true;
     },
     clearError: (state) => {
       state.error = null;
