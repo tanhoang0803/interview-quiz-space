@@ -4,73 +4,73 @@
   padding: 40px 24px;
 }
 
-.header {
+.pageTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin: 0 0 36px;
+}
+
+/* Sections */
+.section {
+  background: white;
+  border-radius: 16px;
+  padding: 28px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+}
+
+.sectionHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 32px;
-  gap: 16px;
+  margin-bottom: 6px;
+  gap: 12px;
 }
 
-.title {
-  font-size: 2rem;
+.sectionTitle {
+  font-size: 1.1rem;
   font-weight: 700;
   color: #1a1a2e;
   margin: 0;
 }
 
-.aiBtn {
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #7c3aed, #4a6cf7);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: opacity 0.15s;
-}
-
-.aiBtn:hover:not(:disabled) {
-  opacity: 0.85;
-}
-
-.aiBtn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.aiLoading {
+.sectionBadge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1px;
   background: #f0f4ff;
-  border: 2px solid #4a6cf7;
-  border-radius: 12px;
-  padding: 16px 20px;
   color: #4a6cf7;
-  font-size: 0.95rem;
-  margin-bottom: 24px;
-  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 20px;
 }
 
+.sectionDesc {
+  font-size: 0.88rem;
+  color: #888;
+  margin: 0 0 20px;
+}
+
+/* Quiz list */
 .list {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
 }
 
 .card {
-  background: white;
-  border-radius: 14px;
-  padding: 20px 24px;
+  background: #f8faff;
+  border-radius: 12px;
+  padding: 16px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+  border: 1px solid #e8eeff;
   transition: box-shadow 0.15s;
 }
 
 .card:hover {
-  box-shadow: 0 6px 20px rgba(74, 108, 247, 0.15);
+  box-shadow: 0 4px 16px rgba(74, 108, 247, 0.12);
 }
 
 .cardInfo {
@@ -80,60 +80,87 @@
 }
 
 .quizTitle {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
   color: #1a1a2e;
   margin: 0;
 }
 
 .count {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   color: #888;
 }
 
 .startBtn {
-  padding: 10px 24px;
+  padding: 8px 22px;
   background: #4a6cf7;
   color: white;
   border: none;
-  border-radius: 10px;
-  font-size: 0.95rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.15s;
+  white-space: nowrap;
 }
 
 .startBtn:hover {
   background: #3a5ce7;
 }
 
-.empty {
-  text-align: center;
-  padding: 48px 24px;
-  color: #888;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-}
-
-.btn {
-  padding: 12px 28px;
-  background: #4a6cf7;
+/* AI button */
+.aiBtn {
+  padding: 8px 18px;
+  background: linear-gradient(135deg, #7c3aed, #4a6cf7);
   color: white;
   border: none;
-  border-radius: 12px;
-  font-size: 1rem;
+  border-radius: 8px;
+  font-size: 0.88rem;
   font-weight: 600;
   cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.15s;
 }
 
-.loading,
+.aiBtn:hover:not(:disabled) { opacity: 0.85; }
+.aiBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* Create button */
+.createBtn {
+  padding: 8px 18px;
+  background: #1a1a2e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.15s;
+}
+
+.createBtn:hover { opacity: 0.8; }
+
+/* States */
+.aiLoading {
+  background: #f0f4ff;
+  border: 2px solid #4a6cf7;
+  border-radius: 10px;
+  padding: 12px 16px;
+  color: #4a6cf7;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.empty {
+  color: #aaa;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
 .error {
-  text-align: center;
-  padding: 60px 24px;
-  font-size: 1.1rem;
-  color: #666;
+  color: #e53e3e;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
 }
-
-.error { color: #e53e3e; }

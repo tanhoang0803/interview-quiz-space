@@ -3,87 +3,113 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { createQuiz } from '../../store/slices/quizSlice';
 import { aiService } from '../../services/aiService';
+import { STATIC_QUIZZES } from '../../data/staticQuizzes';
 import styles from './QuizList.module.css';
 
 const QuizList = () => {
   const { topic } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { quizzes, loading, error } = useSelector((state) => state.quiz);
+  const { quizzes } = useSelector((state) => state.quiz);
 
   const [aiStatus, setAiStatus] = useState('idle');
   const [aiError, setAiError] = useState('');
+
+  const defaultQuizzes = STATIC_QUIZZES.filter((q) => q.topic === topic);
+  const aiQuizzes = quizzes.filter((q) => q.source === 'ai');
+  const userQuizzes = quizzes.filter((q) => q.source === 'user' || !q.source);
 
   const handleGenerateAI = async () => {
     setAiStatus('loading');
     setAiError('');
     try {
       const questions = await aiService.generateQuestions(topic);
-      await dispatch(createQuiz({
+      const result = await dispatch(createQuiz({
         title: `AI-Generated ${topic.charAt(0).toUpperCase() + topic.slice(1)} Quiz`,
         topic,
+        source: 'ai',
         questions,
       }));
-      setAiStatus('done');
+      const quizId = result.payload?.id;
+      if (quizId) navigate(`/quiz/${quizId}`);
+      else setAiStatus('done');
     } catch (err) {
       setAiError(err.message);
       setAiStatus('error');
     }
   };
 
-  const renderContent = () => {
-    if (loading) return <div className={styles.loading}>Loading quizzes...</div>;
-    if (error) return <div className={styles.error}>Firestore error: {error}</div>;
-    if (quizzes.length === 0) return (
-      <div className={styles.empty}>
-        <p>No quizzes yet — click <strong>Generate with AI</strong> above or create manually.</p>
-        <button className={styles.btn} onClick={() => navigate('/create')}>
-          Create manually
-        </button>
+  const QuizCard = ({ quiz }) => (
+    <div className={styles.card}>
+      <div className={styles.cardInfo}>
+        <h3 className={styles.quizTitle}>{quiz.title}</h3>
+        <span className={styles.count}>{quiz.questions?.length ?? 0} questions</span>
       </div>
-    );
-    return (
-      <div className={styles.list}>
-        {quizzes.map((quiz) => (
-          <div key={quiz.id} className={styles.card}>
-            <div className={styles.cardInfo}>
-              <h2 className={styles.quizTitle}>{quiz.title}</h2>
-              <span className={styles.count}>{quiz.questions?.length ?? 0} questions</span>
-            </div>
-            <button
-              className={styles.startBtn}
-              onClick={() => navigate(`/quiz/${quiz.id}`)}
-            >
-              Start
-            </button>
-          </div>
-        ))}
-      </div>
-    );
-  };
+      <button className={styles.startBtn} onClick={() => navigate(`/quiz/${quiz.id}`)}>
+        Start
+      </button>
+    </div>
+  );
 
   return (
     <div className={styles.container}>
-      {/* Header + AI button always visible */}
-      <div className={styles.header}>
-        <h1 className={styles.title}>{topic?.toUpperCase()} Quizzes</h1>
-        <button
-          className={styles.aiBtn}
-          onClick={handleGenerateAI}
-          disabled={aiStatus === 'loading' || aiStatus === 'done'}
-        >
-          {aiStatus === 'loading' ? 'Generating...' : aiStatus === 'done' ? '✓ Generated!' : 'Generate with AI'}
-        </button>
-      </div>
+      <h1 className={styles.pageTitle}>{topic?.toUpperCase()} Quizzes</h1>
 
-      {aiStatus === 'loading' && (
-        <div className={styles.aiLoading}>
-          Asking Groq AI to generate {topic} questions... (takes ~5s)
+      {/* Section 1 — Default Practice */}
+      <section className={styles.section}>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>Default Practice</h2>
+          <span className={styles.sectionBadge}>Built-in</span>
         </div>
-      )}
-      {aiError && <div className={styles.error}>{aiError}</div>}
+        <p className={styles.sectionDesc}>Core interview questions curated for {topic}.</p>
+        <div className={styles.list}>
+          {defaultQuizzes.map((quiz) => <QuizCard key={quiz.id} quiz={quiz} />)}
+        </div>
+      </section>
 
-      {renderContent()}
+      {/* Section 2 — AI Generate */}
+      <section className={styles.section}>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>AI Generate</h2>
+          <button
+            className={styles.aiBtn}
+            onClick={handleGenerateAI}
+            disabled={aiStatus === 'loading'}
+          >
+            {aiStatus === 'loading' ? 'Generating...' : '+ Generate with AI'}
+          </button>
+        </div>
+        <p className={styles.sectionDesc}>Fresh questions generated by Groq AI on demand.</p>
+        {aiStatus === 'loading' && (
+          <div className={styles.aiLoading}>Asking Groq AI... (takes ~5s)</div>
+        )}
+        {aiError && <div className={styles.error}>{aiError}</div>}
+        {aiQuizzes.length === 0 ? (
+          <p className={styles.empty}>No AI quizzes yet — click Generate with AI above.</p>
+        ) : (
+          <div className={styles.list}>
+            {aiQuizzes.map((quiz) => <QuizCard key={quiz.id} quiz={quiz} />)}
+          </div>
+        )}
+      </section>
+
+      {/* Section 3 — Create Quiz */}
+      <section className={styles.section}>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>Create Quiz</h2>
+          <button className={styles.createBtn} onClick={() => navigate('/create')}>
+            + Create Quiz
+          </button>
+        </div>
+        <p className={styles.sectionDesc}>Your own custom quizzes for this topic.</p>
+        {userQuizzes.length === 0 ? (
+          <p className={styles.empty}>No custom quizzes yet — create your first one above.</p>
+        ) : (
+          <div className={styles.list}>
+            {userQuizzes.map((quiz) => <QuizCard key={quiz.id} quiz={quiz} />)}
+          </div>
+        )}
+      </section>
     </div>
   );
 };

@@ -32,6 +32,7 @@ const TopicSelector = () => {
       const result = await dispatch(createQuiz({
         title: `AI-Generated ${topicId.charAt(0).toUpperCase() + topicId.slice(1)} Quiz`,
         topic: topicId,
+        source: 'ai',
         questions,
       }));
       const quizId = result.payload?.id;

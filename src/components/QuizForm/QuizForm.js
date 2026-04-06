@@ -61,7 +61,7 @@ const QuizForm = () => {
     const validationError = validate();
     if (validationError) { setError(validationError); return; }
 
-    await dispatch(createQuiz({ title, topic, questions }));
+    await dispatch(createQuiz({ title, topic, source: 'user', questions }));
     navigate(`/quizzes/${topic}`);
   };
 
