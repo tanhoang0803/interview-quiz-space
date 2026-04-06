@@ -54,4 +54,15 @@ export const quizService = {
     const ref = doc(db, QUIZZES_COLLECTION, id);
     await deleteDoc(ref);
   },
+
+  getAllQuizzes: async () => {
+    const topics = ['javascript', 'dsa', 'react'];
+    const results = await Promise.all(
+      topics.map((t) =>
+        getDocs(query(collection(db, QUIZZES_COLLECTION), where('topic', '==', t)))
+          .then((snap) => snap.docs.map((d) => ({ id: d.id, ...d.data() })))
+      )
+    );
+    return results.flat();
+  },
 };

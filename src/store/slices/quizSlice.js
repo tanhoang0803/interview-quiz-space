@@ -48,6 +48,17 @@ export const updateQuiz = createAsyncThunk(
   }
 );
 
+export const fetchAllFirestoreQuizzes = createAsyncThunk(
+  'quiz/fetchAll',
+  async (_, { rejectWithValue }) => {
+    try {
+      return await quizService.getAllQuizzes();
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
+  }
+);
+
 export const deleteQuiz = createAsyncThunk(
   'quiz/delete',
   async (id, { rejectWithValue }) => {
@@ -65,6 +76,7 @@ const quizSlice = createSlice({
   initialState: {
     quizzes: [],
     globalQuizzes: STATIC_QUIZZES,
+    firestoreQuizzes: [],
     currentQuiz: null,
     activeQuestionIndex: 0,
     userAnswers: [],
@@ -130,6 +142,9 @@ const quizSlice = createSlice({
       })
       .addCase(deleteQuiz.fulfilled, (state, action) => {
         state.quizzes = state.quizzes.filter((q) => q.id !== action.payload);
+      })
+      .addCase(fetchAllFirestoreQuizzes.fulfilled, (state, action) => {
+        state.firestoreQuizzes = action.payload;
       });
   },
 });
