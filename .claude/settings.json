@@ -1,0 +1,50 @@
+{
+  "hooks": {
+    "onTopicSelect": {
+      "description": "Load quizzes for the selected topic from Firestore",
+      "trigger": "topic_selected",
+      "action": "dispatch(fetchQuizzesByTopic(topic))"
+    },
+    "onQuizFinish": {
+      "description": "Calculate and persist score when quiz is completed",
+      "trigger": "quiz_completed",
+      "action": "dispatch(submitResult({ quizId, answers }))"
+    },
+    "onTextInput": {
+      "description": "Trigger AI question generation from user-provided text",
+      "trigger": "ai_generate_requested",
+      "action": "aiService.generateQuestions(text)"
+    }
+  },
+  "agents": {
+    "QuizAgent": {
+      "description": "Handles quiz CRUD operations via quizService",
+      "tools": ["quizService.getQuizzes", "quizService.createQuiz", "quizService.updateQuiz", "quizService.deleteQuiz"]
+    },
+    "AuthAgent": {
+      "description": "Manages Firebase login/logout and session",
+      "tools": ["authService.loginWithEmail", "authService.loginWithGoogle", "authService.logout", "authService.getCurrentUser"]
+    },
+    "AIQuestionAgent": {
+      "description": "Generates questions via OpenAI and caches results",
+      "tools": ["aiService.generateQuestions", "aiService.getCachedQuestions", "aiService.saveToCache"]
+    },
+    "ResultAgent": {
+      "description": "Tracks and queries score history",
+      "tools": ["resultSlice.submitResult", "resultSlice.getHistory", "resultSlice.getWeakAreas"]
+    }
+  },
+  "memory": {
+    "userQuizHistory": "Firestore: users/{uid}/results",
+    "cachedAIQuestions": "Firestore: aiQuestions/{topic}",
+    "savedQuizzes": "Firestore: quizzes/{quizId}"
+  },
+  "skills": [
+    "quiz_creation",
+    "quiz_playing",
+    "scoring_with_explanations",
+    "progress_tracking",
+    "firebase_auth",
+    "ai_question_generation"
+  ]
+}

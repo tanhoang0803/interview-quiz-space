@@ -1,0 +1,160 @@
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.topic {
+  background: #4a6cf7;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.counter {
+  font-size: 0.9rem;
+  color: #888;
+  font-weight: 500;
+}
+
+.progressBar {
+  height: 6px;
+  background: #e8e8e8;
+  border-radius: 3px;
+  margin-bottom: 32px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: #4a6cf7;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.questionCard {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  margin-bottom: 24px;
+}
+
+.questionText {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border: 2px solid #e8e8e8;
+  border-radius: 12px;
+  background: white;
+  cursor: pointer;
+  text-align: left;
+  font-size: 1rem;
+  color: #333;
+  transition: all 0.15s ease;
+}
+
+.option:hover {
+  border-color: #4a6cf7;
+  background: #f0f4ff;
+}
+
+.option.selected {
+  border-color: #4a6cf7;
+  background: #4a6cf7;
+  color: white;
+}
+
+.optionLetter {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #f0f4ff;
+  color: #4a6cf7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.option.selected .optionLetter {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.navBtn {
+  flex: 1;
+  padding: 14px 24px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 2px solid #4a6cf7;
+  color: #4a6cf7;
+  background: white;
+  transition: all 0.15s ease;
+}
+
+.navBtn:hover:not(:disabled) {
+  background: #4a6cf7;
+  color: white;
+}
+
+.navBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.submitBtn {
+  background: #4a6cf7;
+  color: white;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: #3a5ce7;
+}
+
+.loading,
+.error {
+  text-align: center;
+  padding: 60px 24px;
+  font-size: 1.1rem;
+  color: #666;
+}
+
+.error {
+  color: #e53e3e;
+}
