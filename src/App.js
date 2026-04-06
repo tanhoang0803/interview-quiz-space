@@ -12,6 +12,7 @@ import ResultPage from './components/ResultPage/ResultPage';
 import Dashboard from './components/Dashboard/Dashboard';
 import QuizForm from './components/QuizForm/QuizForm';
 import AuthPage from './components/Auth/AuthPage';
+import SeedPage from './components/SeedPage/SeedPage';
 
 import './App.css';
 
@@ -92,6 +93,7 @@ const App = () => {
             }
           />
 
+          <Route path="/seed" element={<ProtectedRoute><SeedPage /></ProtectedRoute>} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
