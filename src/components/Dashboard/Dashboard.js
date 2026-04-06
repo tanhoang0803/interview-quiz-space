@@ -12,7 +12,7 @@ const TOPICS = ['javascript', 'dsa', 'react'];
 const Dashboard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { history, loading } = useSelector((state) => state.result);
+  const { history, loading: historyLoading } = useSelector((state) => state.result);
   const { globalQuizzes } = useSelector((state) => state.quiz);
   const { currentUser } = useSelector((state) => state.user);
 
@@ -32,8 +32,6 @@ const Dashboard = () => {
     return { avg, best, count: results.length, weakAreas };
   };
 
-  if (loading) return <div className={styles.loading}>Loading dashboard...</div>;
-
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Your Progress</h1>
@@ -44,7 +42,9 @@ const Dashboard = () => {
           return (
             <div key={topic} className={styles.topicCard}>
               <h2 className={styles.topicName}>{topic.toUpperCase()}</h2>
-              {stats ? (
+              {historyLoading ? (
+                <p className={styles.noData}>Loading...</p>
+              ) : stats ? (
                 <>
                   <div className={styles.statRow}>
                     <span className={styles.statLabel}>Avg Score</span>
