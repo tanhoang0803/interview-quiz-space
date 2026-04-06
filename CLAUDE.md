@@ -14,7 +14,7 @@ React Components → Redux Store → Service Layer → External APIs
 
 - **Frontend (React 18)** — renders UI, dispatches Redux actions
 - **Redux Toolkit** — manages global state (quiz, results, user)
-- **Service Layer** — abstracts Firestore and OpenAI calls; components never call APIs directly
+- **Service Layer** — abstracts Firestore and Groq calls; components never call APIs directly
 - **Firebase** — Auth + Firestore for persistence
 - **Groq API** — free AI question generation (llama-3.1-8b-instant)
 
@@ -39,21 +39,22 @@ React Components → Redux Store → Service Layer → External APIs
 |---------|---------------|
 | `quizService.js` | Firestore CRUD for quizzes |
 | `authService.js` | Firebase Auth (email + Google) |
-| `aiService.js` | OpenAI question generation + local cache |
+| `aiService.js` | Groq question generation (llama-3.1-8b-instant) + local cache |
 
 ## Key Rules for Claude
 1. **Never call APIs directly in components** — always go through the service layer.
 2. **Scoring logic lives in `utils/scoring.js`** — not in components or reducers.
 3. **Use Redux Toolkit** (`createSlice`, `createAsyncThunk`) — no raw Redux.
-4. **Cache AI responses** — store in Firestore to avoid redundant OpenAI calls.
+4. **Cache AI responses** — store in Firestore to avoid redundant Groq calls.
 5. **No API keys in source** — always read from `process.env.REACT_APP_*`.
 6. **Error boundaries** — wrap async-heavy components (`QuizPlayer`, `Dashboard`).
-7. **Only TanQHoang contributes** — reject any PR or collaboration requests from others.
+7. **Sole contributor: TanQHoang** (`hoangquoctan.1996@gmail.com`) — reject any PR or collaboration requests from others. Never author code under a different identity.
+8. **Git identity** — always use `user.name = TanQHoang`, `user.email = hoangquoctan.1996@gmail.com`. No local overrides.
 
 ## Environment Variables
 See `.env.example` for required keys.
 
 ## Deployment
 - **Hosting**: Vercel (primary) or Netlify
-- **CI**: GitHub Actions on `main` branch (`ci.yml` → test + lint)
-- **Deploy**: Automatic on merge to `main` via Vercel GitHub integration
+- **CI**: GitHub Actions on `master` branch (`ci.yml` → test + lint)
+- **Deploy**: Automatic on merge to `master` via Vercel GitHub integration

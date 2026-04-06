@@ -89,7 +89,7 @@ npm run build
 
 ## Rules
 - Repository: [tanhoang0803/interview-quiz-space](https://github.com/tanhoang0803/interview-quiz-space.git)
-- **Only TanQHoang is allowed as contributor.**
+- **Sole contributor: TanQHoang** (`hoangquoctan.1996@gmail.com`)
 - No external collaborators, forks, or pull requests accepted.
 
 ## Contributing
