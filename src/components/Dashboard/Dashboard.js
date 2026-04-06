@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { fetchHistory } from '../../store/slices/resultSlice';
-import { fetchGlobalQuizzes } from '../../store/slices/quizSlice';
 import { resultService } from '../../services/resultService';
 import { getGrade } from '../../utils/scoring';
 import styles from './Dashboard.module.css';
@@ -19,7 +18,6 @@ const Dashboard = () => {
   useEffect(() => {
     if (currentUser) {
       dispatch(fetchHistory(currentUser.uid));
-      dispatch(fetchGlobalQuizzes());
     }
   }, [dispatch, currentUser]);
 

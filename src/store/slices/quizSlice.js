@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { quizService } from '../../services/quizService';
+import { STATIC_QUIZZES } from '../../data/staticQuizzes';
 
 export const fetchQuizzesByTopic = createAsyncThunk(
   'quiz/fetchByTopic',
@@ -59,22 +60,11 @@ export const deleteQuiz = createAsyncThunk(
   }
 );
 
-export const fetchGlobalQuizzes = createAsyncThunk(
-  'quiz/fetchGlobal',
-  async (_, { rejectWithValue }) => {
-    try {
-      return await quizService.getGlobalQuizzes();
-    } catch (err) {
-      return rejectWithValue(err.message);
-    }
-  }
-);
-
 const quizSlice = createSlice({
   name: 'quiz',
   initialState: {
     quizzes: [],
-    globalQuizzes: [],
+    globalQuizzes: STATIC_QUIZZES,
     currentQuiz: null,
     activeQuestionIndex: 0,
     userAnswers: [],
@@ -140,9 +130,6 @@ const quizSlice = createSlice({
       })
       .addCase(deleteQuiz.fulfilled, (state, action) => {
         state.quizzes = state.quizzes.filter((q) => q.id !== action.payload);
-      })
-      .addCase(fetchGlobalQuizzes.fulfilled, (state, action) => {
-        state.globalQuizzes = action.payload;
       });
   },
 });
