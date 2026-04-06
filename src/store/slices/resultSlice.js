@@ -42,6 +42,11 @@ const resultSlice = createSlice({
     clearError: (state) => {
       state.error = null;
     },
+    clearHistory: (state) => {
+      state.latestResult = null;
+      state.history = [];
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -73,5 +78,5 @@ const resultSlice = createSlice({
   },
 });
 
-export const { clearLatestResult, clearError } = resultSlice.actions;
+export const { clearLatestResult, clearError, clearHistory } = resultSlice.actions;
 export default resultSlice.reducer;

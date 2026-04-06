@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from './store/slices/userSlice';
+import { resetQuiz } from './store/slices/quizSlice';
+import { clearHistory } from './store/slices/resultSlice';
 import { authService } from './services/authService';
 
 import Navbar from './components/Navbar/Navbar';
@@ -32,6 +34,8 @@ const App = () => {
         dispatch(setUser({ uid, email, displayName, photoURL }));
       } else {
         dispatch(setUser(null));
+        dispatch(resetQuiz());
+        dispatch(clearHistory());
       }
     });
     return unsubscribe;
