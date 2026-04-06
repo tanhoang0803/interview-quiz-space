@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { fetchHistory } from '../../store/slices/resultSlice';
+import { fetchGlobalQuizzes } from '../../store/slices/quizSlice';
 import { resultService } from '../../services/resultService';
 import { getGrade } from '../../utils/scoring';
 import styles from './Dashboard.module.css';
@@ -9,12 +11,15 @@ const TOPICS = ['javascript', 'dsa', 'react'];
 
 const Dashboard = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { history, loading } = useSelector((state) => state.result);
+  const { globalQuizzes } = useSelector((state) => state.quiz);
   const { currentUser } = useSelector((state) => state.user);
 
   useEffect(() => {
     if (currentUser) {
       dispatch(fetchHistory(currentUser.uid));
+      dispatch(fetchGlobalQuizzes());
     }
   }, [dispatch, currentUser]);
 
@@ -67,6 +72,27 @@ const Dashboard = () => {
           );
         })}
       </div>
+
+      {globalQuizzes.length > 0 && (
+        <>
+          <h2 className={styles.sectionTitle}>Practice Quizzes</h2>
+          <div className={styles.quizGrid}>
+            {globalQuizzes.map((quiz) => (
+              <div key={quiz.id} className={styles.quizCard}>
+                <span className={styles.quizTopic}>{quiz.topic?.toUpperCase()}</span>
+                <h3 className={styles.quizTitle}>{quiz.title}</h3>
+                <span className={styles.quizCount}>{quiz.questions?.length ?? 0} questions</span>
+                <button
+                  className={styles.startBtn}
+                  onClick={() => navigate(`/quiz/${quiz.id}`)}
+                >
+                  Start
+                </button>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
 
       <h2 className={styles.sectionTitle}>Recent Activity</h2>
       {history.length === 0 ? (
