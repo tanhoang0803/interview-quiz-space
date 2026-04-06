@@ -16,7 +16,7 @@ React Components → Redux Store → Service Layer → External APIs
 - **Redux Toolkit** — manages global state (quiz, results, user)
 - **Service Layer** — abstracts Firestore and OpenAI calls; components never call APIs directly
 - **Firebase** — Auth + Firestore for persistence
-- **OpenAI API** — optional AI-generated questions
+- **Groq API** — free AI question generation (llama-3.1-8b-instant)
 
 ## Component Map
 | Component | Responsibility |

@@ -14,14 +14,14 @@ This project helps learners prepare for technical interviews by combining **quiz
 - Instant scoring with explanations
 - Progress tracking dashboard
 - Firebase authentication (email/password + Google)
-- AI-generated practice questions (optional, via OpenAI)
+- AI-generated practice questions via Groq (llama-3.1-8b-instant, free tier)
 
 ## Tech Stack
 | Layer | Technology |
 |-------|-----------|
 | Frontend | React 18, Redux Toolkit |
 | Auth & Storage | Firebase (Auth + Firestore) |
-| AI Assist | OpenAI API (optional) |
+| AI Assist | Groq API — llama-3.1-8b-instant (free tier) |
 | Hosting | Vercel / Netlify (free tier) |
 | CI/CD | GitHub Actions |
 
