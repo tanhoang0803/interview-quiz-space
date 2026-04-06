@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from './store/slices/userSlice';
 import { resetQuiz } from './store/slices/quizSlice';
@@ -24,6 +24,18 @@ const ProtectedRoute = ({ children }) => {
   return children;
 };
 
+const GuestRoute = ({ children }) => {
+  const { currentUser } = useSelector((state) => state.user);
+  if (currentUser) return <Navigate to="/" replace />;
+  return children;
+};
+
+const NavbarWrapper = () => {
+  const { pathname } = useLocation();
+  if (pathname === '/auth') return null;
+  return <Navbar />;
+};
+
 const App = () => {
   const dispatch = useDispatch();
 
@@ -43,10 +55,10 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <Navbar />
+      <NavbarWrapper />
       <main>
         <Routes>
-          <Route path="/auth" element={<AuthPage />} />
+          <Route path="/auth" element={<GuestRoute><AuthPage /></GuestRoute>} />
 
           <Route
             path="/"
