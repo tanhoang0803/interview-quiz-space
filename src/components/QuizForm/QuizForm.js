@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { createQuiz } from '../../store/slices/quizSlice';
 import styles from './QuizForm.module.css';
 
-const TOPICS = ['javascript', 'dsa', 'react'];
+const TOPICS = ['javascript', 'dsa', 'react', 'typescript'];
 
 const emptyQuestion = () => ({
   text: '',

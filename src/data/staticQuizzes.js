@@ -1,6 +1,7 @@
 import javascriptQuestions from './questions/javascript';
 import dsaQuestions from './questions/dsa';
 import reactQuestions from './questions/react';
+import typescriptQuestions from './questions/typescript';
 
 export const STATIC_QUIZZES = [
   {
@@ -20,6 +21,12 @@ export const STATIC_QUIZZES = [
     title: 'React Core Concepts',
     topic: 'react',
     questions: reactQuestions,
+  },
+  {
+    id: 'static-typescript',
+    title: 'TypeScript Essentials',
+    topic: 'typescript',
+    questions: typescriptQuestions,
   },
 ];
 

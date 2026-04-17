@@ -9,6 +9,7 @@ const TOPICS = [
   { id: 'javascript', label: 'JavaScript', icon: 'JS', description: 'Closures, async, prototypes, ES6+' },
   { id: 'dsa', label: 'DSA', icon: 'DS', description: 'Arrays, trees, sorting, complexity' },
   { id: 'react', label: 'React', icon: 'Re', description: 'Hooks, state, lifecycle, patterns' },
+  { id: 'typescript', label: 'TypeScript', icon: 'TS', description: 'Types, generics, utility types, strict mode' },
 ];
 
 const TopicSelector = () => {
