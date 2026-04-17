@@ -213,7 +213,7 @@ const typescriptQuestions = [
     ],
     answer: 1,
     explanation:
-      'Template literal types look like `type EventName<T extends string> = \`on${Capitalize<T>}\``. They allow composing string literal types — `type Getters<T extends string> = \`get${Capitalize<T>}\`` applied to `"name" | "age"` yields `"getName" | "getAge"`. Used in advanced pattern matching and typed event systems.',
+      'Template literal types embed type variables inside backtick syntax. For example, a type like EventName maps a string T to "on" + Capitalize<T>. Applied to "click" | "focus", it yields "onClick" | "onFocus". Used in advanced pattern matching and typed event systems.',
   },
   {
     text: 'What is the `NonNullable<T>` utility type?',
