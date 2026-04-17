@@ -1,7 +1,17 @@
 # Interview Quiz Learning Space
 
+<!-- Pass / Fail -->
 [![CI](https://github.com/tanhoang0803/interview-quiz-space/actions/workflows/ci.yml/badge.svg)](https://github.com/tanhoang0803/interview-quiz-space/actions/workflows/ci.yml)
 [![Deploy](https://github.com/tanhoang0803/interview-quiz-space/actions/workflows/deploy.yml/badge.svg)](https://github.com/tanhoang0803/interview-quiz-space/actions/workflows/deploy.yml)
+[![Tests](https://img.shields.io/badge/tests-13%20passed-brightgreen?logo=jest&logoColor=white)](https://github.com/tanhoang0803/interview-quiz-space/actions/workflows/ci.yml)
+
+<!-- Tech Stack -->
+[![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)](https://react.dev)
+[![Redux Toolkit](https://img.shields.io/badge/Redux_Toolkit-764ABC?logo=redux&logoColor=white)](https://redux-toolkit.js.org)
+[![Firebase](https://img.shields.io/badge/Firebase-Auth_%26_Firestore-FFCA28?logo=firebase&logoColor=black)](https://firebase.google.com)
+[![Groq](https://img.shields.io/badge/Groq-LLaMA_3.1-F55036?logo=groq&logoColor=white)](https://groq.com)
+[![Vercel](https://img.shields.io/badge/Vercel-Deployed-000000?logo=vercel&logoColor=white)](https://interview-quiz-space.vercel.app)
+[![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-CI%2FCD-2088FF?logo=github-actions&logoColor=white)](https://github.com/tanhoang0803/interview-quiz-space/actions)
 
 ## Live Demo
 **[https://interview-quiz-space.vercel.app](https://interview-quiz-space.vercel.app)**
